@@ -10,27 +10,27 @@ app.use(cors());
 
 const repositories = [];
 
-app.get("/repositories", (req, res) => {
+app.get("/repositories", (_, res) => {
   return res.status(200).json(repositories)
 });
 
 app.post("/repositories", (req, res) => {
-  const { title, tech, url } = req.body;
+  const { title, techs, url } = req.body;
   const repository = {
     id: uuid(),
     likes: 0,
     title,
-    tech,
+    techs,
     url,
   }
   repositories.push(repository)
 
-  return res.status(200).json({ repository })
+  return res.status(200).json(repository)
 });
 
 app.put("/repositories/:id", (req, res) => {
   const { id } = req.params;
-  const { title, tech, url } = req.body;
+  const { title, techs, url } = req.body;
 
   if (!isUuid(id)) {
     return res.status(400)
@@ -44,7 +44,7 @@ app.put("/repositories/:id", (req, res) => {
     const repository = {
       id,
       title,
-      tech,
+      techs,
       url,
       likes: repositories[repositoryIndex].likes
     };
@@ -74,7 +74,7 @@ app.delete("/repositories/:id", (req, res) => {
 
   repositories.splice(repositoryIndex, 1);
 
-  return res.status(200).end();
+  return res.status(204).end();
 });
 
 app.post("/repositories/:id/like", (req, res) => {
@@ -93,7 +93,7 @@ app.post("/repositories/:id/like", (req, res) => {
     return res.status(200).json(repositories[repositoryIndex]);
 
   } catch (err) {
-    return res.status(404).json({ error: `Update erro | ${err}` });
+    return res.status(400).json({ error: `Update erro | ${err}` });
   }
 });
 
