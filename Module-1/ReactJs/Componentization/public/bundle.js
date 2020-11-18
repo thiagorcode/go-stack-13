@@ -7,12 +7,6 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
-  /*!**********************!*\
-    !*** ./src/index.js ***!
-    \**********************/
-  /*! unknown exports (runtime-defined) */
-  /*! runtime requirements:  */
-  eval("var soma = function soma(a, b) {\n  return a + b;\n};\n\nconsole.log(soma(1, 3));\n\n//# sourceURL=webpack://frontend/./src/index.js?");
-  /******/
-})()
-  ;
+/******/ 	"use strict";
+/******/ })()
+;
