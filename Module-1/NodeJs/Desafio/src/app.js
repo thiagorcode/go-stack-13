@@ -16,16 +16,25 @@ app.get("/repositories", (_, res) => {
 
 app.post("/repositories", (req, res) => {
   const { title, techs, url } = req.body;
-  const repository = {
-    id: uuid(),
-    likes: 0,
-    title,
-    techs,
-    url,
-  }
-  repositories.push(repository)
+  try {
+    if (!title || !techs || !url) {
+      throw Error
+    }
 
-  return res.status(200).json(repository)
+    const repository = {
+      id: uuid(),
+      likes: 0,
+      title,
+      techs,
+      url,
+    }
+    repositories.push(repository)
+
+    return res.status(200).json(repository)
+  } catch (error) {
+    return res.status(417).json({ err: `${Date.now()} - Não foram encaminhados todos os dados!` })
+  }
+
 });
 
 app.put("/repositories/:id", (req, res) => {
