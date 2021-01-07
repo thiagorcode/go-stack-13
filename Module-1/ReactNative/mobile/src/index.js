@@ -44,7 +44,6 @@ export default function App() {
           <Text style={styles.buttonText}>Adicionar Projeto</Text>
         </TouchableOpacity>
       </SafeAreaView>
-
       {/* <View style={styles.container} >
         <Text>DADOS DA API:</Text>
         {projects.map(project => <Text style={styles.project} key={project.id}>{project.title}</Text>
