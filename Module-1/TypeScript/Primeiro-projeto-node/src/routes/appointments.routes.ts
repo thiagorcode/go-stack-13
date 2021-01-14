@@ -1,19 +1,25 @@
 import { Router } from 'express';
-import { startOfHour, parseISO, isEqual } from 'date-fns';
-
-import Appointment from '../models/Appointment';
+import { startOfHour, parseISO } from 'date-fns';
 // Manipulação de datas
 
-const appointmentsRouter = Router();
+import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
-const appointments: Appointment[] = [];
+const appointmentsRouter = Router();
+const appointmentsRepository = new AppointmentsRepository();
+
+appointmentsRouter.get('/', (request, response) => {
+  const appointments = appointmentsRepository.all();
+
+  return response.json(appointments);
+});
 
 appointmentsRouter.post('/', (request, response) => {
   const { provider, date } = request.body;
 
   const parsedDate = startOfHour(parseISO(date));
-  const findAppointmentInSameDate = appointments.find(
-    appointment => isEqual(parsedDate, appointment.date), // IsEqual é utilizado para verificar se duas datas são iguais;
+
+  const findAppointmentInSameDate = appointmentsRepository.findByDate(
+    parsedDate,
   );
 
   if (findAppointmentInSameDate) {
@@ -21,9 +27,15 @@ appointmentsRouter.post('/', (request, response) => {
       .status(400)
       .json({ message: 'this appointment is already booked' });
   }
-  const appointment = new Appointment(provider, parsedDate);
 
-  appointments.push(appointment);
+  // DTO
+  /* Ajuda a entender qual os parâmetros estão fazendo pois apresenta qual o argumento está faltando,
+   * parametros nomeados.
+   */
+  const appointment = appointmentsRepository.create({
+    provider,
+    date: parsedDate,
+  });
   return response.json(appointment);
 });
 
