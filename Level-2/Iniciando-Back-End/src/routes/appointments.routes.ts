@@ -9,13 +9,13 @@ import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
 
-appointmentsRouter.get('/', (request, response) => {
+appointmentsRouter.get('/', async (request, response) => {
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
-  const appointments = appointmentsRepository.all();
+  const appointments = await appointmentsRepository.find();
 
   return response.json(appointments);
 });
-/** 09:48 */
+
 appointmentsRouter.post('/', async (request, response) => {
   try {
     const { provider, date } = request.body;
