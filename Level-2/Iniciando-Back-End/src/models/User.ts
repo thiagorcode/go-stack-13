@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('User')
+@Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -19,9 +19,6 @@ class User {
 
   @Column()
   password: string;
-
-  @Column('timestamp with time zone')
-  date: Date;
 
   @CreateDateColumn()
   created_at: Date;
