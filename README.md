@@ -1,5 +1,5 @@
 # GoStack13
- Estudos e Desafios feito no GoStack 13 - 2020 - React | React Native | Node
+ Estudos e Desafios feito no GoStack 13 - 2020/2021 - ReactJs | React Native | NodeJs | TypeScript
 ## Level 1 
  - Back-end com Node.Js
  - Front-end com ReactJs
