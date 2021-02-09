@@ -1,22 +1,20 @@
 import 'reflect-metadata';
+import 'dotenv/config';
+
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+
 import routes from './routes';
-import uploadConfig from './config/upload';
 import AppError from './errors/AppError';
 
-import './database/index';
+import createConnection from './database';
 
-const PORT_LOCAL = 3000;
-
+createConnection();
 const app = express();
 
 app.use(express.json());
-// localhost:PORT/files/NOME_DA_IMAGEM
-app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
 
-// Tratativas de erros
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
@@ -33,10 +31,4 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-app.get('/', (request, response) => {
-  return response.json({ message: 'helloworld' });
-});
-
-app.listen(PORT_LOCAL, () => {
-  console.log(`Server started on port ${PORT_LOCAL}`);
-});
+export default app;
