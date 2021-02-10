@@ -3,7 +3,7 @@
 
 </h2>
 
-Mais um desafio do curso da GoStack concluído. Objetivo era desenvolver uma API que deve armazenar transações financeiras de entrada e saída e permitir o cadastro e a listagem dessas transações, além de permitir a criação de novos registros no banco de dados a partir do envio de um arquivo csv. Tecnologias/bibliotecas utilizadas: Node.Js, TypeScript, Multer, Express e Typerorm.
+Mais um desafio do curso da GoStack concluído🎯. Objetivo era desenvolver uma API que deve armazenar transações financeiras de entrada e saída e permitir o cadastro e a listagem dessas transações, além de permitir a criação de novos registros no banco de dados a partir do envio de um arquivo CSV. Nesse projeto coloquei também em prática padrões de projeto e alguns princípios de programação como Data Transfer Object (DTO), Keep It Simple, Stupid (KISS) e SOLID. Tecnologias/bibliotecas utilizadas: Node.Js, TypeScript, Multer, Express e Typerorm.
 
 ### Para rodar a aplicação
 
