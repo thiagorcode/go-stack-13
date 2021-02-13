@@ -3,7 +3,7 @@ import { shade } from 'polished';
 
 export const Title = styled.h1`
   font-size: 48px;
-  color: #3a3a3a;
+  color: #3F3F3F;
   max-width: 450px;
   line-height: 56px;
   margin-top: 80px;
@@ -11,7 +11,7 @@ export const Title = styled.h1`
 
 export const Form = styled.form`
   margin-top: 40px;
-  max-width: 700px;
+  max-width: 750px;
   display: flex;
   input {
     flex: 1;
@@ -64,7 +64,8 @@ export const Repositories = styled.div`
       border-radius: 50%;
     }
     div {
-      margin-left: 16px;
+      margin: 0 16px;
+      flex: 1;
       strong {
         font-size: 20px;
         color: #3d3d4d;
@@ -80,4 +81,10 @@ export const Repositories = styled.div`
       color: #cbcbd6;
     }
   }
+`;
+
+export const Error = styled.span`
+  display: block;
+  color: #c53030;
+  margin-top: 8px;
 `;
