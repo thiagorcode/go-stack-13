@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect, FormEvent } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
@@ -8,8 +9,6 @@ import {
   Title, Form, Error, Repositories,
 } from './style';
 
-// Não precisa colocar tipagem para todas as informações que tem na API,
-// mas apenas para aquelas que vou usar. - Interface
 interface Repository {
   full_name: string;
   description: string;
@@ -18,7 +17,7 @@ interface Repository {
     avatar_url: string;
   };
 }
-//
+
 const Dashboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
   const [inputError, setInputError] = useState('');
@@ -32,13 +31,6 @@ const Dashboard: React.FC = () => {
   });
 
   useEffect(() => {
-    // Primeira estratégia seria salvar no local storage diretamente
-    /* Segunda estratégia salvo no localstorage toda vez
-que ocorre uma mudança no status do estado da constante.
-
-*/
-    // Localstorage não aceita array por isso usamos o JSON para converter para String
-
     localStorage.setItem('@GitHubExplorer:repositories', JSON.stringify(repositories));
   }, [repositories]);
 
@@ -69,7 +61,7 @@ que ocorre uma mudança no status do estado da constante.
 
       <Form hasError={!!inputError} onSubmit={handleAddRepository}>
         <input
-          placeholder="Digite nome do repos"
+          placeholder="Digite nome do repositório"
           onChange={(e) => setNewRepo(e.target.value)}
           value={newRepo}
         />
@@ -79,7 +71,10 @@ que ocorre uma mudança no status do estado da constante.
       <Repositories>
 
         {repositories.map((repository) => (
-          <a key={repository.full_name} href="teste">
+          <Link
+            key={repository.full_name}
+            to={`/repositories/${repository.full_name}`}
+          >
             <img
               src={repository.owner.avatar_url}
               alt={repository.owner.login}
@@ -90,7 +85,7 @@ que ocorre uma mudança no status do estado da constante.
             </div>
 
             <FiChevronRight size={20} />
-          </a>
+          </Link>
         ))}
       </Repositories>
     </>
