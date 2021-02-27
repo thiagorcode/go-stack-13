@@ -49,7 +49,7 @@ export const Content = styled.div`
     &:hover {
       color: ${shade(0.2, '#f4ede8')};
     }
-  }
+  };
 `;
 
 export const Background = styled.div`
