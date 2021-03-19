@@ -1,7 +1,7 @@
 import React from 'react';
-import { RectButtonProperties } from 'react-native-gesture-handler'; // Propriedades estilizada no botão
+import { RectButtonProperties } from 'react-native-gesture-handler';
 
-import { Container, ButtonText } from './styles'
+import { Container, ButtonText } from './styles';
 
 interface ButtonProps extends RectButtonProperties {
   children: string;
@@ -10,12 +10,9 @@ interface ButtonProps extends RectButtonProperties {
 const Button: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
     <Container {...rest}>
-      <ButtonText>
-        {children}
-      </ButtonText>
-
+      <ButtonText>{children}</ButtonText>
     </Container>
-  )
-}
+  );
+};
 
 export default Button;
