@@ -4,9 +4,9 @@ import { getCustomRepository } from 'typeorm';
 // Rota: Receber a requisição, chamar outro arquivo, devolver uma resposta.
 // Manipulação de datas
 
-import AppointmentsRepository from '../repositories/AppointmentsRepository';
-import CreateAppointmentService from '../services/CreateAppointmentService';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import AppointmentsRepository from '@modules/appointments/repositories/AppointmentsRepository';
+import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
+import ensureAuthenticated from '@modules/users/http/middlewares/ensureAuthenticated';
 
 const appointmentsRouter = Router();
 

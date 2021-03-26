@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Appointment from '../models/Appointment';
+import Appointment from '../infra/typeorm/enitities/Appointment';
 /**
  * 1 -Um repositório é a conexão entre a persistência (um banco de dados por exemplo) e a nossa aplicação.
  É pelo repositório onde iremos buscar as informações no banco (ou onde estiver salva) e devolver para a aplicação.
