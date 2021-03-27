@@ -1,4 +1,4 @@
-export default interface ICreateAppointmentDto {
+export default interface ICreateAppointmentDTO {
   date: Date;
   provider_id: string;
 }
