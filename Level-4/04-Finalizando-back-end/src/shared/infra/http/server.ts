@@ -18,7 +18,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // localhost:PORT/files/NOME_DA_IMAGEM
-app.use('/files', express.static(uploadConfig.directory));
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 // Tratativas de erros
