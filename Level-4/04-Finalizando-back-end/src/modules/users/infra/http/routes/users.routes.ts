@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
+import { celebrate, Joi, Segments } from 'celebrate';
 
 import uploadConfig from '@config/upload';
 
@@ -11,13 +12,18 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 const usersRouter = Router();
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
-const upload = multer(uploadConfig);
-
-usersRouter.post('/', usersController.create);
-/*
- *  ensureAuthenticated => Pois precisamos que o usuário esteja autenticado
- *para podemos poder inserir ou alterar a foto do usuário.
- */
+const upload = multer(uploadConfig.multer);
+usersRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    },
+  }),
+  usersController.create,
+);
 usersRouter.patch(
   '/avatar',
   ensureAuthenticated,

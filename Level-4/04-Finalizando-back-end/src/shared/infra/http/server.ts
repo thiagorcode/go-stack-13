@@ -1,13 +1,14 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import { errors } from 'celebrate';
 import 'express-async-errors';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import routes from './routes';
-
 import '@shared/infra/typeorm';
 import '@shared/container';
 
@@ -20,6 +21,7 @@ app.use(express.json());
 // localhost:PORT/files/NOME_DA_IMAGEM
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
+app.use(errors());
 
 // Tratativas de erros
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
