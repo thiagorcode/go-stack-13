@@ -17,11 +17,11 @@ const PORT_LOCAL = 3333;
 
 const app = express();
 
-app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 // localhost:PORT/files/NOME_DA_IMAGEM
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+app.use(rateLimiter);
 app.use(routes);
 app.use(errors());
 
