@@ -51,7 +51,6 @@ const SignUp: React.FC = () => {
         });
 
         await api.post('/users', data);
-
         history.push('/');
 
         addToast({
