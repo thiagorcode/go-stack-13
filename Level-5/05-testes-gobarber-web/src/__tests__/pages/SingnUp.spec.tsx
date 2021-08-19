@@ -1,9 +1,14 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+import MockAdapter from 'axios-mock-adapter';
+
+import api from '../../services/api';
 import SignUp from '../../pages/SignUp';
 
+const apiMock = new MockAdapter(api);
+
 const mockedHistoryPush = jest.fn();
-const mockedApiPost = jest.fn();
+
 const mockedAddToast = jest.fn();
 
 jest.mock('react-router-dom', () => ({
@@ -19,18 +24,22 @@ jest.mock('../../hooks/toast', () => ({
   }),
 }));
 
-jest.mock('../../services/api', () => ({
-  post: () => mockedApiPost,
-}));
-
 describe('SingUp Page', () => {
   // Faz com execute uma função antes de executar o teste.
   beforeEach(() => {
     mockedHistoryPush.mockClear();
-    mockedApiPost.mockClear();
   });
 
   it('should be able to sign up', async () => {
+    const apiResponse = {
+      user: {
+        id: 'user-123',
+        name: 'John Doe',
+        email: 'johndoe@example.com.br',
+      },
+    };
+
+    apiMock.onPost('users').reply(200, apiResponse);
     const { getByPlaceholderText, getByText } = render(<SignUp />);
 
     const emailField = getByPlaceholderText('E-mail');
@@ -68,11 +77,11 @@ describe('SingUp Page', () => {
   });
 
   it('should display an error if sign up fails', async () => {
-    mockedApiPost.mockImplementation(() => {
-      console.log('test');
+    const apiResponse = {
 
-      throw new Error();
-    });
+    };
+
+    apiMock.onPost('users').reply(404, apiResponse);
     const { getByPlaceholderText, getByText } = render(<SignUp />);
 
     const emailField = getByPlaceholderText('E-mail');
