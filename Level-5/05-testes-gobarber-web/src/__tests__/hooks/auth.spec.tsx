@@ -112,7 +112,8 @@ describe('Auth hook', () => {
       avatar_url: 'image-test.jpg',
     };
 
-    act(() => {
+    act(() => { // Quando disparamos uma função sincrona e realiza a mudança de estado
+      // o ideal é usar esse act()
       result.current.updateUser(user);
     });
 
